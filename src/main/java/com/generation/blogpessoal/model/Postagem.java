@@ -31,7 +31,6 @@ public class Postagem {
 	@UpdateTimestamp
 	private LocalDateTime data;
 
-    /*Insira os Getters and Setters*/
 
     public Long getId() {
         return this.id;
