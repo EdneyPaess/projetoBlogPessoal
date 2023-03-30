@@ -2,8 +2,6 @@ package com.generation.blogpessoal.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,32 +14,38 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
-@Table(name= "tb_usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@NotNull(message = "O Atributo Nome é Obrigatório!")
+	private Long id;
+
+	@NotNull(message = "O atributo Nome é Obrigatório!")
 	private String nome;
-	
-	@NotNull(message = "O Atributo Usuário é Obrigatório!")
-	@Email(message = "O Atributo Usuário deve ser um email válido!")
+
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
-	
-	@NotBlank(message = "O Atributo Senha é Obrigatório!")
+
+	@NotBlank(message = "O atributo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
-	
-	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres" )
+
+	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
-	
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
-	
+
+	/* Métodos Construtores  */
 
 	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
 		this.id = id;
@@ -51,22 +55,21 @@ public class Usuario {
 		this.foto = foto;
 	}
 	
+	public Usuario() { }
 	
-	
-	public Usuario() {
+	/* Insira os Getters and Setters */
+
+
+	public Long getId() {
+		return this.id;
 	}
 
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -74,7 +77,7 @@ public class Usuario {
 	}
 
 	public String getUsuario() {
-		return usuario;
+		return this.usuario;
 	}
 
 	public void setUsuario(String usuario) {
@@ -82,7 +85,7 @@ public class Usuario {
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
 	public void setSenha(String senha) {
@@ -90,7 +93,7 @@ public class Usuario {
 	}
 
 	public String getFoto() {
-		return foto;
+		return this.foto;
 	}
 
 	public void setFoto(String foto) {
@@ -98,13 +101,11 @@ public class Usuario {
 	}
 
 	public List<Postagem> getPostagem() {
-		return postagem;
+		return this.postagem;
 	}
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
-	
+
 }

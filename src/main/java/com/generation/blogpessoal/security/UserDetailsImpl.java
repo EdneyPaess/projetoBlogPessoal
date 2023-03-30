@@ -13,6 +13,7 @@ public class UserDetailsImpl implements UserDetails{
 private static final long serialVersionUID =1L;
 	
 	private String userName;
+	
 	private String password;
 	
 	private List<GrantedAuthority> authorities;
@@ -22,7 +23,7 @@ private static final long serialVersionUID =1L;
 		this.password = user.getSenha();
 	}
 	
-	public UserDetailsImpl (){ }
+	public UserDetailsImpl (){}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,7 +61,7 @@ private static final long serialVersionUID =1L;
 		return true;
 	}
 
-    @Override
+	@Override
 	public boolean isEnabled() {
 		
 		return true;
